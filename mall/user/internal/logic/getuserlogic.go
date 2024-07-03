@@ -25,9 +25,17 @@ func NewUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLogic {
 }
 
 func (l *UserLogic) GetUser(in *user.IdRequest) (*user.UserResponse, error) {
+	id, _ := strconv.ParseInt(in.Id, 10, 64)
+	userData, err := l.svcCtx.UserRepo.FindById(context.Background(), id)
+
+	if err != nil {
+		return nil, err
+	}
+
 	return &user.UserResponse{
-		Id:   "1",
-		Name: "test",
+		Id:     strconv.FormatInt(userData.Id, 10),
+		Name:   userData.Name,
+		Gender: userData.Gender,
 	}, nil
 }
 

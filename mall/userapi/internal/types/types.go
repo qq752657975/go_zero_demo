@@ -10,3 +10,12 @@ type Response struct {
 	Message string `json:"message"`
 	Data    any    `json:"data"`
 }
+
+type IdRequest struct {
+	Id string `json:"id" path:"id"`
+}
+
+type LoginRequest struct {
+	UserName string `json:"userName"`
+	Password string `json:"password"`
+}
